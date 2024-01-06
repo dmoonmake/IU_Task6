@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- <link href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/ui-lightness/jquery-ui.css' rel='stylesheet'> -->
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+    
+    <div>
+        <nav class="navbar">
+            <div class="container-fluid " >
+              <a class="navbar-brand " href="#">
+                <img src="./images/laptop.svg" alt="TOPerator Brand Icon" width="30" height="24" class="d-inline-block align-text-top">
+                TOPerator
+              </a>
+            </div>
+          </nav>
+    </div>
+
+    <div class="my-5">
+      <div class="p-5 text-center bg-body-tertiary">
+        <div class="container py-5">
+          <h1 class="">Computer Components Order Form</h1>
+          <p class="col-lg-8 mx-auto lead">
+            Are you ready to upgrade your tech arsenal? 
+              Look no further! Whether you're a data analyst in need of robust processors, 
+              or simply looking for headphone, we've got you covered.
+          </p>
+        </div>
+      </div>
+    </div>
+
+      <div id="myBtnContainer">
+        <button class="mybtn active" onclick="filterSelection('all')"> Show all</button>
+        <button class="mybtn" onclick="filterSelection('laptops')"> Laptops</button>
+        <button class="mybtn" onclick="filterSelection('headsets')"> Headsets</button>
+      </div>
+
+      <div class="album py-5 bg-body-tertiary ">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+          <div class="col">
+            <div class="card shadow-sm card-item filterDiv laptops">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text itemName">Laptop1</p>
+                <p class="card-text">Macbook Pro - 14"</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-remove">-</button>
+                    <button type="button" class="btn btn-primary btn-add">+</button>
+                  </div>
+                  <small class="text-body-secondary itemCount">0</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm card-item filterDiv laptops">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text itemName">Laptop2</p>
+                <p class="card-text">Macbook Pro - 16"</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-remove">-</button>
+                    <button type="button" class="btn btn-primary btn-add">+</button>
+                  </div>
+                  <small class="text-body-secondary itemCount">0</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm card-item filterDiv laptops">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text itemName">Laptop3</p>
+                <p class="card-text">IBM Lenova X1 - 14"</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-remove">-</button>
+                    <button type="button" class="btn btn-primary btn-add">+</button>
+                  </div>
+                  <small class="text-body-secondary itemCount">0</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col">
+            <div class="card shadow-sm card-item filterDiv headsets">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text itemName">Headset1</p>
+                <p class="card-text">Jabra X63 - On ear</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-remove">-</button>
+                    <button type="button" class="btn btn-primary btn-add">+</button>
+                  </div>
+                  <small class="text-body-secondary itemCount">0</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card shadow-sm card-item filterDiv headsets">
+              <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+              <div class="card-body">
+                <p class="card-text itemName">Headset2</p>
+                <p class="card-text">Jabra X65 - Over ear</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-primary btn-remove">-</button>
+                    <button type="button" class="btn btn-primary btn-add">+</button>
+                  </div>
+                  <small class="text-body-secondary itemCount">0</small>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          </div>
+        </div>
+      </div>
+    <form class="needs-validation" id="requestForm" name="requestForm" onsubmit="return validateForm()" novalidate="">
+    <div class="container">
+        <main>
+          <div class="row g-5">
+            <div class="col-md-5 col-lg-4 order-md-last">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                If you don't find your desired item in the list above, feel free to reach out to us in the following ways:<br>
+                - 🏤 Visit our helpdesk on the 6th floor.<br>
+                - 📧 Email us at support@TOPerator.com.<br>
+                - 📞 Call us at 023 8141 8142.<br>
+                We're here to assist you in finding the component you're looking for!<br>
+              </div>
+            </div>
+
+            <div class="col-md-7 col-lg-8">
+              <h4 class="mb-3">Requestor</h4>
+              <!-- <form class="needs-validation" novalidate=""> -->
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" placeholder="John" value="John" required="">
+                    <div class="invalid-feedback">
+                      Valid first name is required.
+                    </div>
+                  </div>
+      
+                  <div class="col-sm-6">
+                    <label for="lastName" class="form-label">Last name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Doe" value="Doe" required="">
+                    <div class="invalid-feedback">
+                      Valid last name is required.
+                    </div>
+                  </div>
+      
+
+
+                  <div class="col-sm-6">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="text" class="form-control" id="email" placeholder="john.doe@TOPerator.com" value="john.doe@TOPerator.com" required="">
+                    <div class="invalid-feedback">
+                      Valid email is required.
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label for="email" class="form-label">Phone Number</label>
+                    <input type="text" class="form-control" id="phoneNumber" placeholder="0611111111" value="0611111111" required="">
+                    <div class="invalid-feedback">
+                      Valid phone number is required.
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6">
+                    <label for="username" class="form-label">Employee ID</label>
+                    <div class="input-group has-validation">
+                      <span class="input-group-text">ID</span>
+                      <input type="text" class="form-control" id="employeeID" placeholder="0007" value="0007" required="">
+                    <div class="invalid-feedback">
+                        Your Employee ID is required.
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-3">
+                    <label for="costCentre" class="form-label">Cost Centre</label>
+                    <input type="text" class="form-control" id="costCentre" placeholder="1234" value="1234" required="">
+                    <div class="invalid-feedback">
+                      Valid cost centre is required.
+                    </div>
+                  </div>
+ 
+                  <div class="col-sm-3">
+                    <label for="start" class="form-label">Expect Date:</label>
+                    <!-- <input type="date" id="my_date_picker"> -->
+ 
+                    <input type="date" id="expectDate" value="" min="" max="2024-12-31" />
+                  </div>
+              
+
+                <hr class="my-4">
+      
+                <button class="w-100 btn btn-primary btn-lg btnSendForm" type="submit" onclick="submitForm()">Submit</button>
+                <!-- <input type="submit" value="Continue to checkout" class="btn"> -->
+              </form>
+            </div>
+          </div>
+        </main>
+      
+        <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+          <p class="mb-1">© 2023 TOPerator</p>
+        </footer>
+      </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>    
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+    <script src="index.js"></script>
+
+  </body>
+</html>
