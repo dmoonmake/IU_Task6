@@ -1,26 +1,27 @@
+/* Import front from Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap');
 
 body{
-    font-family: 'Red Hat Display', sans-serif;
-    margin: 5% 0;
+  font-family: 'Red Hat Display', sans-serif;
+  margin: 5% 0;
+}
+
+.jumbotron {
+  background-color: #a7c5da;
 }
 
 .navbar {
-    background-color: #e3f2fd;
-    font-weight: bold;
+  background-color: #a7c5da;
+  font-weight: bold;
 }
-#myBtnContainer {
+
+#filterContainer {
   overflow: hidden;
 }
 
 .filterDiv {
   float: left;
-  
-  /* background-color: #2196F3; */
-  /* color: #ffffff; */
   width: 100%;
-  /* line-height: 100px; */
-  /* text-align: center; */
   margin: 2px;
   display: none; /* Hidden by default */
 }
@@ -31,21 +32,24 @@ body{
 }
 
 /* Style the buttons */
-.mybtn {
+.filterBtn {
   border: none;
   outline: none;
   padding: 12px 16px;
-  /* background-color: ; */
   cursor: pointer;
 }
 
 /* Add a light grey background on mouse-over */
-.mybtn:hover {
+.filterBtn:hover {
   background-color: #ddd;
 }
 
 /* Add a dark background to the active button */
-.mybtn.active {
+.filterBtn.active {
   background-color: #666;
   color: white;
+}
+
+input::placeholder {
+  color: lightgrey !important;
 }

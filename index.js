@@ -1,24 +1,32 @@
-// Default filter is set to "all"
-filterSelection("all");
-resetBasket();
+// Product assortments
+// const productAssortments = Array.from($(".itemName")).map(x => x.innerText);
+const productNameAssortments = Array.from($(".productName")).map(x => x.innerText);
+const numberOfAssortments = productNameAssortments.length;
+
+// Filter buttons
+const filterBtn = $(".filterBtn");
+
+// Item count in the order
+let itemCount = $(".itemCount").map(function(){ return parseInt(this.innerText); });
+let strItemCount = $(".itemCount");
 
 // Filter selection
 function filterSelection(chosenFilter) {
-  var x, i;
+  let i;
   itemCard = $(".filterDiv");
-  if (chosenFilter == "all") chosenFilter = "";
+  if (chosenFilter === "all") chosenFilter = "";
   
   for (i = 0; i < itemCard.length; i++) {
     // Remove the "show" class from elements that are not selected
-    removeClass(itemCard[i], "show");
+    removeFilterClass(itemCard[i], "show");
     // Add the "show" class (display:block) to the filtered elements
-    if (itemCard[i].className.indexOf(chosenFilter) > -1) addClass(itemCard[i], "show");
+    if (itemCard[i].className.indexOf(chosenFilter) > -1) addFilterClass(itemCard[i], "show");
   }
 }
 
 // Function to add class from an element
-function addClass(element, name) {
-  var i, existingClass, updatedClass;
+function addFilterClass(element, name) {
+  let i, existingClass, updatedClass;
 
   // Split the existing classes and new classes into arrays
   existingClass = element.className.split(" ");
@@ -28,7 +36,7 @@ function addClass(element, name) {
   for (i = 0; i < updatedClass.length; i++) {
 
     // Check if the element doesn't already have the class
-    if (existingClass.indexOf(updatedClass[i]) == -1) {
+    if (existingClass.indexOf(updatedClass[i]) === -1) {
 
       // Add the class to the element
       element.className += " " + updatedClass[i];
@@ -37,7 +45,7 @@ function addClass(element, name) {
 }
 
 // Function to remove class from an element
-function removeClass(element, name) {
+function removeFilterClass(element, name) {
   var i, existingClass, updatedClass;
 
   // Split the existing classes and new classes into arrays
@@ -57,104 +65,48 @@ function removeClass(element, name) {
   element.className = existingClass.join(" ");
 }
 
-
-// Add active class to the current control button (highlight it)
-var btnContainer = document.getElementById("myBtnContainer");
-var btns = btnContainer.getElementsByClassName("mybtn");
-for (var i = 0; i < btns.length; i++) {
-  btns[i].addEventListener("click", function() {
-    var current = document.getElementsByClassName("active");
-    current[0].className = current[0].className.replace(" active", "");
-    this.className += " active";
-  });
-}
-
-// Product assortments
-var productAssortments = Array.from($(".itemName")).map(x => x.innerText);
-var numberOfAssortments = productAssortments.length;
-var itemCount = $(".itemCount").map(function(){ return parseInt(this.innerText); });
-var strItemCount = $(".itemCount");
-
-function resetBasket() {
-  
-}
-// var itemCount = $(".itemCount").map(function(){ return parseInt(this.innerText); });
-// var strItemCount = $(".itemCount");
-
-// Add event listener for add item function
-$(".btn-add").click(function() {
-  addItem($(".btn-add").index(this));
-});
-
-// Add event listener for remove item function
-$(".btn-remove").click(function() {
-  removeItem($(".btn-remove").index(this));
-});
-
-// $(".btn-remove")[j].addEventListener("click",removeItem.bind(this, j));
-
-// console.log(strItemNames);
+// Update itemCount when adding item
 function addItem(j){
   itemCount[j] = itemCount[j] + 1;
   strItemCount[j].textContent = '' + itemCount[j];
   console.log(itemCount);
-  // $(".itemCount").index(j).text(itemCount[j]);
-  // $(".itemCount").index(j).text(itemCount[j]);
-  // var newRequest = new Request(1,1,1,1,1,1,1,itemCount);
-  // console.log(newRequest);
+  updateBasket();
 }
 
+// Update itemCount when removing item
 function removeItem(j){
   if (itemCount[j] > 0) {
     itemCount[j] = itemCount[j] - 1;
-      strItemCount[j].textContent = '' + itemCount[j];
+    strItemCount[j].textContent = '' + itemCount[j];
   }
   console.log(itemCount);
+  updateBasket();
 }
 
-function validateForm() {
-  let x = document.forms["requestForm"]["firstName"].value;
-  if (x == "") {
-    alert("Name must be filled out");
-    return false;
+// Display the current basket
+function updateBasket() {
+  let i;
+  let basketText = "";
+  let totalCount = 0;
+  if (Math.max(...itemCount) === 0) {
+    $(".currentBasket").html("");
+    $("#totalCount").html(0);
+  } else {
+    for (i = 0; i < numberOfAssortments; i++) {
+      if (itemCount[i] != 0) {
+        basketText = basketText + "<li class='list-group-item d-flex justify-content-between lh-sm'><h6 class='my-0'>" + productNameAssortments[i] + "</h6><span class='text-body-secondary'>" +  itemCount[i] + "</span></li>";
+        totalCount = totalCount + itemCount[i];
+        console.log(totalCount);
+      }
+      $(".currentBasket").html(basketText);
+      $("#totalCount").text(totalCount);
+    }
   }
-}
-
-// Send the order
-// function submitForm() {
-//     const form = document.getElementById('requestForm');
-//     var newRequest = new Request(firstName,lastName,email,phoneNumber,employeeID,costCentre,dueDate,itemCount)
-//     console.log(newRequest);
-//     var requestor = "";
-//     for (var i = 0; i < numberOfitems; i++){
-//         if (numItemCount[i]>0){
-//         // basket = basket + strItemNames[i]+": "+numItemCount[i]+ ", ";
-//         basket.push(strItemNames[i]+":"+numItemCount[i]);
-//         // numItemCount.push(parseInt(strItemCount[j].textContent))
-//         }
-//     }
-//     validateForm();
-//     form.submit();
-//     form.style.display = 'none';
-//     var processing = document.createElement('span');
-//     processing.appendChild(document.createTextNode('processing ...'));
-//     form.parentNode.insertBefore(processing, form);
-//     alert("You have ordered: " + basket);
-// }
+ }
 
 
-// Create basket object
-// function Basket(){
-//   var ItemCount = [];
-//   for (var j = 0; j < numberOfitems; j++) {
-//   // strItemNames.push(strItemNames[j].innerText);
-//   numItemCount.push(parseInt(strItemCount[j].textContent));
-//   }
-//   return ItemCount;
-  
-// }
 
-// Create request object
+// Constructor to create Order object
 class Order {
   constructor(firstName, lastName, email, phoneNumber, employeeID, costCentre, dueDate, itemCount) {
     this.firstName = firstName;
@@ -168,57 +120,79 @@ class Order {
   }
 }
 
-  
-function submitForm(){
-//   var submitButton = $(".btnSendForm");
-//   submitButton.onclick = Request;
-//   const form = $('#requestForm');
-  // var newOrder = new Order($('#firstName').val(), $('#lastName').val(), $('#email').val(),
-  //   $('#phoneNumber').val(),$('#employeeID').val(),$('#costCentre').val(), $('#dueDate').val(),
-  //   itemCount
-  // );
-  // ,lastName,email,phoneNumber,employeeID,costCentre,dueDate,itemCount)
-  // console.log($('#firstName').val());
+// Add event listener for highlight the active filter
+$(".filterBtn").click(function() {
+  let i;
+  let current = $(".filterBtn").index(this);// position that clicked
 
-  // var objects = [];
-  const form = $('#requestForm');
-$('#requestForm').on('submit', function(e){
-  var newOrder = new Order($('#firstName').val(), $('#lastName').val(), $('#email').val(),
-    $('#phoneNumber').val(),$('#employeeID').val(),$('#costCentre').val(), $('#expectDate').val(),
-    itemCount
-  );
-    // objects.push({item:{'category':category, 'price':parseFloat(price)}});
-    console.log(newOrder);
-    // alert("You have ordered: " + newOrder );
-
-    // JSON.stringify(newOrder,null, 4));
-    e.preventDefault();
-
+  for (i = 0; i < filterBtn.length; i++) {
+    if (i === current) {
+      addFilterClass(filterBtn[i], "active");
+    } else {
+      removeFilterClass(filterBtn[i], "active");
+    }
+  }
 });
 
-//     validateForm();
-    form.submit();
-    form.css("display","none");
-    // alert(`Thank you for your order, ${$('#firstName').val()}!`); 
-    resetBasket();
-    // form.style.display = 'none';
-    // var processing = document.createElement('span');
-    // processing.appendChild(document.createTextNode('processing ...'));
-    // form.parentNode.insertBefore(processing, form);
-    // alert("You have ordered: " + newOrder);
-}
+// Add event listener for adding item 
+$(".btn-add").click(function() {
+  addItem($(".btn-add").index(this));
+});
 
-// Add event listener for remove item function
-// $(".btnSendForm").click(function() {
-//   var newRequest = new Request(1,1,1,1,1,1,1,itemCount);
-//   console.log(newRequest);
-// });
+// Add event listener for removing item 
+$(".btn-remove").click(function() {
+  removeItem($(".btn-remove").index(this));
+});
 
-// $(document).ready(function () {
-//   $(function () {
-//     $("#my_date_picker").datepicker;
-//   });
-// }) 
+//Add custom email validation
+$('#emailInput').on('input', function(){ 
+  const emailInput = this.value;
+  const allowedDomain = "toperator.com";
+  const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+  console.log(emailInput);
+
+  if (emailInput.includes(allowedDomain)) {
+    if (emailRegex.test(this.value)) {
+      this.setCustomValidity('');
+    } else {
+      this.setCustomValidity('Please enter a valid email address');
+    }
+  } else {
+    this.setCustomValidity('Email must be from toperator.com domain');
+  }
+});
+
+// Add event listener for submiting the order
+$('#requestForm').on('submit', function(e){
+  const form = $('#requestForm');
+  e.preventDefault();
+  if (this.checkValidity() === false) {
+    e.stopPropagation();
+    this.classList.add("was-validated");
+  } else if (Math.max(...itemCount) === 0) {
+    alert("Please add some item(s) to your order!");
+  } else {
+    //new Order object is created and ready for further submission
+    var newOrder = new Order($('#firstName').val(), $('#lastName').val(), $('#email').val(),
+      $('#phoneNumber').val(),$('#employeeID').val(),$('#costCentre').val(), $('#expectDate').val(),
+      itemCount);
+    console.log(newOrder);
+
+    // After "Successful" submission, hide the item display and form sections
+    $(".formDisplay").css("display","none");
+    $("#productsDisplay").css("display","none");
+    $("h1").html(`Thank you for your order, <strong>${$('#firstName').val()}</strong>!`);
+    $(".subtitle").html(`A confirmation email has been sent to ${$('#email').val()}.`); 
+  }
+});
+
+// Default filter is set to "all"
+filterSelection("all");
+
+
+
+
 
 
 
