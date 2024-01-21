@@ -1,5 +1,4 @@
 // Product assortments
-// const productAssortments = Array.from($(".itemName")).map(x => x.innerText);
 const productNameAssortments = Array.from($(".productName")).map(x => x.innerText);
 const numberOfAssortments = productNameAssortments.length;
 
@@ -67,18 +66,25 @@ function removeFilterClass(element, name) {
 
 // Update itemCount when adding item
 function addItem(j){
+  // Add 1 from the item count
   itemCount[j] = itemCount[j] + 1;
+  // Update string representation 
   strItemCount[j].textContent = '' + itemCount[j];
+  // Validate if itemCount is updated correctly
   console.log(itemCount);
   updateBasket();
 }
 
 // Update itemCount when removing item
 function removeItem(j){
+  // Check if item is more than 0
   if (itemCount[j] > 0) {
+    // Reduce 1 from the item count
     itemCount[j] = itemCount[j] - 1;
+    // Update string representation 
     strItemCount[j].textContent = '' + itemCount[j];
   }
+  // Validate if itemCount is updated correctly
   console.log(itemCount);
   updateBasket();
 }
@@ -104,8 +110,6 @@ function updateBasket() {
   }
  }
 
-
-
 // Constructor to create Order object
 class Order {
   constructor(firstName, lastName, email, phoneNumber, employeeID, costCentre, dueDate, itemCount) {
@@ -127,8 +131,10 @@ $(".filterBtn").click(function() {
 
   for (i = 0; i < filterBtn.length; i++) {
     if (i === current) {
+      // Add "active" class to current filterBtn
       addFilterClass(filterBtn[i], "active");
     } else {
+      // remove "active" class from the rest of filterBtn
       removeFilterClass(filterBtn[i], "active");
     }
   }
@@ -150,38 +156,46 @@ $('#emailInput').on('input', function(){
   const allowedDomain = "toperator.com";
   const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-  console.log(emailInput);
-
+  // Validate email input
   if (emailInput.includes(allowedDomain)) {
     if (emailRegex.test(this.value)) {
       this.setCustomValidity('');
     } else {
+      // Check if email format is correct
       this.setCustomValidity('Please enter a valid email address');
     }
   } else {
+    // Check if email domain is from the company domian
     this.setCustomValidity('Email must be from toperator.com domain');
   }
+  this.reportValidity();
 });
 
 // Add event listener for submiting the order
 $('#requestForm').on('submit', function(e){
   const form = $('#requestForm');
   e.preventDefault();
+
+  // Form input validation
   if (this.checkValidity() === false) {
     e.stopPropagation();
     this.classList.add("was-validated");
   } else if (Math.max(...itemCount) === 0) {
+    // Display error message when the basket is empty
     alert("Please add some item(s) to your order!");
   } else {
     //new Order object is created and ready for further submission
-    var newOrder = new Order($('#firstName').val(), $('#lastName').val(), $('#email').val(),
+    var newOrder = new Order($('#firstName').val(), $('#lastName').val(), $('#emailInput').val(),
       $('#phoneNumber').val(),$('#employeeID').val(),$('#costCentre').val(), $('#expectDate').val(),
       itemCount);
+    // Validation if the order object is created correctly  
     console.log(newOrder);
 
     // After "Successful" submission, hide the item display and form sections
     $(".formDisplay").css("display","none");
     $("#productsDisplay").css("display","none");
+
+    // Update with the order confirmation message
     $("h1").html(`Thank you for your order, <strong>${$('#firstName').val()}</strong>!`);
     $(".subtitle").html(`A confirmation email has been sent to ${$('#email').val()}.`); 
   }
